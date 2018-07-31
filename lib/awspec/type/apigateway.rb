@@ -3,11 +3,30 @@ module Awspec::Type
     aws_resource Aws::APIGateway::Client
 
     def resource_via_client
-      @resource_via_client ||= find_apigateway(@display_name)
+      return unless @resource_via_client.nil?
+
+      @resource_via_client = find_apigateway_by_id(@display_name)
+      return @resource_via_client if @resource_via_client
+
+      @resource_via_client = find_apigateway_by_name(@display_name)
     end
 
     def id
-      @id ||= resource_via_client.id if resource_via_client
+      return @id unless @id.nil?
+
+      res = resource_via_client
+      return unless res
+
+      @id = res.id
+    end
+
+    def name
+      return @name unless @name.nil?
+
+      res = resource_via_client
+      return unless res
+
+      @name = res.name
     end
   end
 end
