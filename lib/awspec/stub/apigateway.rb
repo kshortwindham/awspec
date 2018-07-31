@@ -1,7 +1,7 @@
 Aws.config[:apigateway] = {
   stub_responses: {
     get_rest_api: {
-      id: 'my-apigateway',
+      id: 'deadbeef',
       name: 'my-apigateway',
       description: 'Zamboni is awesome',
       created_date: Time.at(1_530_826_668),
